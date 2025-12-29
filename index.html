@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Interactive Journal</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Libraries -->
+    <!-- p5.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <!-- StPageFlip -->
+    <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
+</head>
+<body>
+
+    <!-- p5.js container (background) -->
+    <div id="p5-container"></div>
+
+    <!-- The Book Container -->
+    <div class="book-wrapper">
+        <div id="book">
+            <!-- Pages will be injected here by script.js -->
+            
+            <!-- Hardcoded Cover for initial structure -->
+            <div class="page cover" data-density="hard">
+                <div class="page-content">
+                    <h1>The Lost Journal</h1>
+                    <p class="author">by A. Traveler</p>
+                    <p class="instruction">(Click corner or drag to open)</p>
+                </div>
+            </div>
+
+            <!-- Hardcoded Table of Contents Page -->
+            <div class="page" data-density="hard">
+                <div class="page-content">
+                    <h2>Table of Contents</h2>
+                    <ul id="toc-list">
+                        <!-- TOC items injected here -->
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
