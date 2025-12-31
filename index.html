@@ -74,13 +74,41 @@
     </div>
     </div>
 
-    <!-- UI Controls -->
+    <!-- UI Controls (Desktop) -->
     <div id="ui-controls">
         <button id="btn-toc" title="Go to Table of Contents">
             Table of Contents
         </button>
     </div>
 
+    <!-- Mobile Navigation Controls -->
+    <div id="mobile-nav-controls">
+        <button id="btn-prev-page" class="nav-btn" aria-label="Previous Page">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round">
+                <path d="M15 18l-6-6 6-6" />
+            </svg>
+        </button>
+
+        <button id="btn-toc-mobile" class="nav-btn" aria-label="Table of Contents">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round">
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+        </button>
+
+        <button id="btn-next-page" class="nav-btn" aria-label="Next Page">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round">
+                <path d="M9 18l6-6-6-6" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Application Modules (add responsiveManager) -->
+    <script src="lib/responsiveManager.js"></script>
     <script src="script.js"></script>
 </body>
 

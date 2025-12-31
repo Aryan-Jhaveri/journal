@@ -219,3 +219,74 @@ p {
 #ui-controls button:active {
     transform: translateY(0);
 }
+
+/* ========================================
+   Mobile Navigation Controls
+   ======================================== */
+#mobile-nav-controls {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    background: rgba(93, 64, 55, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 50px;
+    padding: 8px 16px;
+    gap: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    color: #eec;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    min-height: 48px;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.1);
+}
+
+.nav-btn:active {
+    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Mobile Media Query - Show mobile controls, hide desktop */
+@media (max-width: 768px) {
+    #mobile-nav-controls {
+        display: flex;
+    }
+
+    #ui-controls {
+        display: none !important;
+    }
+
+    .book-wrapper {
+        padding: 10px;
+    }
+
+    /* Adjust book size for mobile */
+    #book {
+        max-width: 100vw;
+        max-height: 80vh;
+    }
+}

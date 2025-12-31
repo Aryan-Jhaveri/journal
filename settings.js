@@ -35,6 +35,13 @@ const JOURNAL_SETTINGS = {
         'default': 'DefaultScene'
     },
 
+    // Responsive/Mobile Settings
+    responsive: {
+        mobileBreakpoint: 768,  // px - below this is "mobile"
+        forceSinglePageOnMobile: true,
+        showMobileControls: true
+    },
+
     // --- Styling (Applied at runtime) ---
     // CSS font strings. Make sure these fonts are imported in css or available.
     fonts: {

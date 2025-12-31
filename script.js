@@ -29,7 +29,12 @@ async function initApp() {
     // 5. Initialize Page Flip
     BookEngine.initPageFlip();
 
-    // 6. Connect Page Change Events to Scene Switching
+    // 6. Initialize Responsive Manager (mobile/desktop detection)
+    if (typeof ResponsiveManager !== 'undefined') {
+        ResponsiveManager.init();
+    }
+
+    // 7. Connect Page Change Events to Scene Switching
     BookEngine.onPageChange((pageData) => {
         const chapterInfo = BookEngine.getChapterForPage(pageData);
         if (chapterInfo && JOURNAL_SETTINGS.shaderBackgrounds.enabled) {
