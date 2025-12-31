@@ -1,32 +1,133 @@
 
+// =============================================================================
+// JOURNAL SETTINGS - Global Configuration
+// =============================================================================
+// All configurable values for the Interactive Journal.
+// Modify these settings to customize the appearance and behavior.
 
-// Global Configuration for the Interactive Journal
 const JOURNAL_SETTINGS = {
-    // --- Book Dimensions & Setup ---
-    bookId: 'book',
-    tocId: 'toc-list',
+
+    // =========================================================================
+    // CORE SETUP
+    // =========================================================================
+
+    // Data source for chapter content
     dataSource: 'chapters.json',
 
-    // Size of a *single* page. The book will be double this width when open.
-    width: 400,
-    height: 600,
-
-    // Set to true to force single-page view (portrait). 
-    // Set to false to allow two-page spread (landscape) when screen is wide enough.
-    usePortrait: false,
-
-    // --- Visuals ---
-    // Set to false to disable the p5.js particle background
-    enableBackgroundAnimation: false,
-
-    // --- Shader Background Settings ---
-    shaderBackgrounds: {
-        enabled: true,  // Master toggle for shader backgrounds
-        fallbackToParticles: true,  // Use particle system if shaders fail
-        performanceMode: 'auto'  // 'auto', 'high', 'low'
+    // DOM element IDs
+    elements: {
+        bookId: 'book',
+        tocListId: 'toc-list',
+        p5ContainerId: 'p5-container',
+        mobileControlsId: 'mobile-nav-controls',
+        desktopControlsId: 'ui-controls',
+        btnTocId: 'btn-toc',
+        btnPrevId: 'btn-prev-page',
+        btnNextId: 'btn-next-page',
+        btnTocMobileId: 'btn-toc-mobile',
+        btnSettingsId: 'btn-settings-mobile',
+        settingsModalId: 'settings-modal'
     },
 
-    // Scene mapping: chapter filename -> sketch scene name
+    // =========================================================================
+    // BOOK LAYOUT
+    // =========================================================================
+
+    // Set to true to force single-page view (portrait mode)
+    // Set to false to allow two-page spread when screen is wide enough
+    usePortrait: false,
+
+    // Number of static pages before dynamic content (Cover, Blank, TOC, Blank)
+    staticPageCount: 4,
+
+    // TOC page index (for navigation buttons)
+    tocPageIndex: 2,
+
+    // Back cover text
+    backCoverText: 'The End',
+
+    // =========================================================================
+    // BOOK SIZING - Desktop (Two-page spread)
+    // =========================================================================
+    desktop: {
+        pageWidthPercent: 0.25,   // Each page as % of viewport width
+        pageHeightPercent: 0.70,  // Page height as % of viewport height
+        maxPageWidth: 450,        // Maximum page width in pixels
+        maxPageHeight: 650        // Maximum page height in pixels
+    },
+
+    // =========================================================================
+    // BOOK SIZING - Mobile (Single page view)
+    // =========================================================================
+    mobile: {
+        pageWidthPercent: 0.85,   // Page width as % of viewport width
+        pageHeightPercent: 0.65,  // Page height as % of viewport height
+        maxPageWidth: 350,        // Maximum page width in pixels
+        maxPageHeight: 500        // Maximum page height in pixels
+    },
+
+    // =========================================================================
+    // STPAGEFLIP LIBRARY SETTINGS
+    // =========================================================================
+    pageFlip: {
+        minWidth: 150,
+        maxWidth: 500,
+        minHeight: 200,
+        maxHeight: 700,
+        maxShadowOpacity: 0.5,
+        showCover: true,
+        mobileScrollSupport: true,
+        autoSize: true
+    },
+
+    // =========================================================================
+    // RESPONSIVE BEHAVIOR
+    // =========================================================================
+    responsive: {
+        mobileBreakpoint: 768,       // px - below this triggers mobile mode
+        forceSinglePageOnMobile: true,
+        showMobileControls: true,
+        resizeDebounceMs: 150,       // Debounce delay for resize events
+        pageRestoreDelayMs: 100      // Delay before restoring page after resize
+    },
+
+    // =========================================================================
+    // CONTENT SETTINGS
+    // =========================================================================
+    content: {
+        charsPerPage: 500,           // Approximate characters per page
+        estimatedImageSize: 300,     // Estimated "size" of image in character units
+
+        // Fallback content when chapters.json fails to load
+        fallback: {
+            title: 'Welcome',
+            content: 'Could not load chapters.json. Please check your connection.'
+        }
+    },
+
+    // =========================================================================
+    // TYPOGRAPHY & STYLING
+    // =========================================================================
+    fonts: {
+        body: "'IM Fell English', serif",
+        headers: "'Dancing Script', cursive",
+        handwriting: "'Dancing Script', cursive"
+    },
+
+    // Page content styling
+    pageMargins: '5px',
+    fontSize: '10px',
+
+    // =========================================================================
+    // SHADER BACKGROUNDS
+    // =========================================================================
+    shaderBackgrounds: {
+        enabled: true,               // Master toggle
+        fallbackToParticles: true,   // Use particles if shaders fail
+        performanceMode: 'auto'      // 'auto', 'high', 'low'
+    },
+
+    // Scene mapping: chapter filename -> scene constructor name
     sceneMapping: {
         'prologue': 'PrologueScene',
         'chapter_01': 'Chapter01Scene',
@@ -35,29 +136,18 @@ const JOURNAL_SETTINGS = {
         'default': 'DefaultScene'
     },
 
-    // Responsive/Mobile Settings
-    responsive: {
-        mobileBreakpoint: 768,  // px - below this is "mobile"
-        forceSinglePageOnMobile: true,
-        showMobileControls: true
-    },
-
-    // --- Styling (Applied at runtime) ---
-    // CSS font strings. Make sure these fonts are imported in css or available.
-    fonts: {
-        body: "'IM Fell English', serif",
-        headers: "'Dancing Script', cursive",
-        handwriting: "'Dancing Script', cursive"
-    },
-
-    // Inner spacing of the page text
-    pageMargins: "5px",
-
-    // Font size for body text
-    fontSize: "10px",
-
-    // --- Content ---
-    // Approximate characters per page before splitting to a new page.
-    charsPerPage: 500  // Low default to demonstrate splitting easily
+    // =========================================================================
+    // DEBUG & LOGGING
+    // =========================================================================
+    debug: {
+        logPageChanges: false,
+        logSceneSwitches: true,
+        logResponsiveChanges: true
+    }
 };
+
+// Legacy accessors for backwards compatibility
+JOURNAL_SETTINGS.bookId = JOURNAL_SETTINGS.elements.bookId;
+JOURNAL_SETTINGS.tocId = JOURNAL_SETTINGS.elements.tocListId;
+JOURNAL_SETTINGS.charsPerPage = JOURNAL_SETTINGS.content.charsPerPage;
 
