@@ -27,7 +27,7 @@ const JOURNAL_SETTINGS = {
     },
 
     // Inner spacing of the page text
-    pageMargins: "20px",
+    pageMargins: "5px",
 
     // Font size for body text
     fontSize: "10px",

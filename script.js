@@ -167,37 +167,53 @@ function renderBookContent(chapters) {
     const tocList = document.getElementById(JOURNAL_SETTINGS.tocId);
 
     // Clear existing dynamic content
-    tocList.innerHTML = '';
+    // Clear existing dynamic pages correctly
+    // We only want to keep the initial static pages (Cover, Blank, TOC, Blank -> 4 pages)
+    // Identify static pages by absence of a specific class or just keep the first 4?
+    // Safer: Add a class 'static-page' to HTML and remove everything else.
+    // Or just check if we have more than 4 pages.
+    const allPages = bookElement.querySelectorAll('.page');
+    const staticPageCount = 4; // Cover, Blank, TOC, Blank
 
-    // Static pages count offset.
-    // Dynamically count existing static pages in the DOM to determine start index.
-    let globalPageIndex = document.querySelectorAll(`#${JOURNAL_SETTINGS.bookId} .page`).length;
+    // Remove any previously added dynamic pages
+    for (let i = allPages.length - 1; i >= staticPageCount; i--) {
+        allPages[i].remove();
+    }
+
+    // Reset global index
+    let globalPageIndex = staticPageCount;
 
     chapters.forEach((chapter) => {
         // 1. Create TOC Entry (Links to the *start* of the chapter)
         const li = document.createElement('li');
         li.textContent = chapter.title;
 
-        // Capture the current starting page index for this chapter
-        const chapterStartPage = globalPageIndex;
+        // Capture specific page index
+        const targetPage = globalPageIndex;
         li.onclick = () => {
-            if (pageFlipInstance) pageFlipInstance.flip(chapterStartPage);
+            // Ensure pageFlipInstance is ready
+            if (pageFlipInstance) pageFlipInstance.flip(targetPage);
         };
         tocList.appendChild(li);
 
-        // 2. Split Content into Pages
+        // 2. Split Content
         const safeContent = chapter.content || "";
         const contentPages = splitTextIntoChunks(safeContent, JOURNAL_SETTINGS.charsPerPage || 800);
 
         contentPages.forEach((chunk, chunkIndex) => {
+            // Helper to determine if we need to mark these pages for easier removal later? 
+            // We just rely on index slicing above.
             const isFirstPage = chunkIndex === 0;
             const pageDiv = createPageElement(chapter, chunk, isFirstPage, chunkIndex + 1, contentPages.length);
             bookElement.appendChild(pageDiv);
-            globalPageIndex++; // Increment for next page
+            globalPageIndex++;
         });
     });
 
-    // Append Back Cover
+    // Ensure total page count is even before adding Back Cover?
+    // StPageFlip works best with even total pages usually, but let's just add the back cover.
+    // If we want the back cover to be a "Hard" cover at the very end.
+
     const backCover = document.createElement('div');
     backCover.classList.add('page', 'cover');
     backCover.setAttribute('data-density', 'hard');
@@ -208,23 +224,60 @@ function renderBookContent(chapters) {
 /**
  * Splits text into chunks based on char limit, preserving paragraphs.
  */
+/**
+ * Splits text into chunks based on char limit, preserving paragraphs and handling images.
+ */
 function splitTextIntoChunks(text, maxChars) {
     if (!text) return [];
 
-    const paragraphs = text.split('\n');
+    // Pre-process: Identify images and temporarily replace them or split around them.
+    // Regex for Markdown image: ![alt](url)
+    // We'll split the text by images first.
+    const imageRegex = /(!\[.*?\]\(.*?\))/g;
+    const sections = text.split(imageRegex); // This preserves the captured group (the image tag)
+
     let pages = [];
-    let currentLimit = maxChars;
     let currentChunk = "";
 
-    paragraphs.forEach(para => {
-        // If single paragraph is huge, might still overflow, but this is a simple heuristic.
-        if ((currentChunk.length + para.length) > currentLimit && currentChunk.length > 0) {
-            pages.push(currentChunk);
-            currentChunk = para + "\n";
+    sections.forEach(section => {
+        if (section.match(imageRegex)) {
+            // It's an image. Parse it to HTML.
+            // Format: ![alt](url)
+            const match = section.match(/!\[(.*?)\]\((.*?)\)/);
+            const alt = match[1];
+            const src = match[2];
+            const imgHTML = `<div class="story-image-container"><img src="${src}" alt="${alt}" class="story-image"></div>`;
+
+            // If current chunk has content, image might fit or start new page.
+            // Images take a lot of visual space. Let's assume an image takes ~400 chars worth of space?
+            // Or force a page break for large images.
+            // Approach: If image + current chunk > max, push current chunk, then push image (or add to new).
+            // Simplification: Treat image as a chunk of length 300.
+            const estimatedImageSize = 300;
+
+            if ((currentChunk.length + estimatedImageSize) > maxChars && currentChunk.length > 0) {
+                // Page break before image
+                pages.push(currentChunk);
+                currentChunk = imgHTML + "\n";
+            } else {
+                currentChunk += imgHTML + "\n";
+            }
         } else {
-            currentChunk += para + "\n";
+            // Regular text. Split by paragraphs as before.
+            const paragraphs = section.split('\n');
+            paragraphs.forEach(para => {
+                if (!para.trim()) return; // Skip empty splits if any
+
+                if ((currentChunk.length + para.length) > maxChars && currentChunk.length > 0) {
+                    pages.push(currentChunk);
+                    currentChunk = para + "\n";
+                } else {
+                    currentChunk += para + "\n";
+                }
+            });
         }
     });
+
     if (currentChunk.trim().length > 0) {
         pages.push(currentChunk);
     }
