@@ -1,81 +1,74 @@
-
 // --- configuration ---
-const CONFIG = {
-    // Reference to DOM elements
-    bookId: 'book',
-    tocId: 'toc-list',
-    // Reference to data source
-    dataSource: 'chapters.json',
-    // Book dimensions
-    bookDims: { width: 400, height: 600 }
-};
+// The CONFIG object is removed as JOURNAL_SETTINGS is now used.
 
 let pageFlipInstance; // Global reference to the book instance
 
 // --- p5.js Background Sketch ---
-const backgroundSketch = (p) => {
-    let particles = [];
+if (window.JOURNAL_SETTINGS && JOURNAL_SETTINGS.enableBackgroundAnimation) {
+    const backgroundSketch = (p) => {
+        let particles = [];
 
-    p.setup = () => {
-        let canvas = p.createCanvas(p.windowWidth, p.windowHeight);
-        canvas.parent('p5-container');
-        p.background(44, 41, 37);
+        p.setup = () => {
+            let canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+            canvas.parent('p5-container');
+            p.background(44, 41, 37);
 
-        for (let i = 0; i < 50; i++) {
-            particles.push(new Particle(p));
-        }
-    };
+            for (let i = 0; i < 50; i++) {
+                particles.push(new Particle(p));
+            }
+        };
 
-    p.draw = () => {
-        p.background(44, 41, 37, 10);
-        for (let particle of particles) {
-            particle.update();
-            particle.show();
-        }
-    };
+        p.draw = () => {
+            p.background(44, 41, 37, 10);
+            for (let particle of particles) {
+                particle.update();
+                particle.show();
+            }
+        };
 
-    p.windowResized = () => {
-        p.resizeCanvas(p.windowWidth, p.windowHeight);
-    };
+        p.windowResized = () => {
+            p.resizeCanvas(p.windowWidth, p.windowHeight);
+        };
 
-    class Particle {
-        constructor(p) {
-            this.p = p;
-            this.x = p.random(p.width);
-            this.y = p.random(p.height);
-            this.vx = p.random(-0.5, 0.5);
-            this.vy = p.random(-0.5, 0.5);
-            this.size = p.random(1, 3);
-            this.alpha = p.random(50, 150);
-        }
-
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-
-            // Mouse interaction
-            let d = this.p.dist(this.x, this.y, this.p.mouseX, this.p.mouseY);
-            if (d < 100) {
-                let angle = this.p.atan2(this.y - this.p.mouseY, this.x - this.p.mouseX);
-                this.x += this.p.cos(angle) * 2;
-                this.y += this.p.sin(angle) * 2;
+        class Particle {
+            constructor(p) {
+                this.p = p;
+                this.x = p.random(p.width);
+                this.y = p.random(p.height);
+                this.vx = p.random(-0.5, 0.5);
+                this.vy = p.random(-0.5, 0.5);
+                this.size = p.random(1, 3);
+                this.alpha = p.random(50, 150);
             }
 
-            if (this.x < 0) this.x = this.p.width;
-            if (this.x > this.p.width) this.x = 0;
-            if (this.y < 0) this.y = this.p.height;
-            if (this.y > this.p.height) this.y = 0;
-        }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
 
-        show() {
-            this.p.noStroke();
-            this.p.fill(200, 190, 170, this.alpha);
-            this.p.ellipse(this.x, this.y, this.size);
-        }
-    }
-};
+                // Mouse interaction
+                let d = this.p.dist(this.x, this.y, this.p.mouseX, this.p.mouseY);
+                if (d < 100) {
+                    let angle = this.p.atan2(this.y - this.p.mouseY, this.x - this.p.mouseX);
+                    this.x += this.p.cos(angle) * 2;
+                    this.y += this.p.sin(angle) * 2;
+                }
 
-new p5(backgroundSketch);
+                if (this.x < 0) this.x = this.p.width;
+                if (this.x > this.p.width) this.x = 0;
+                if (this.y < 0) this.y = this.p.height;
+                if (this.y > this.p.height) this.y = 0;
+            }
+
+            show() {
+                this.p.noStroke();
+                this.p.fill(200, 190, 170, this.alpha);
+                this.p.ellipse(this.x, this.y, this.size);
+            }
+        }
+    };
+
+    new p5(backgroundSketch);
+}
 
 
 // --- Core Application Logic ---
@@ -85,8 +78,11 @@ document.addEventListener('DOMContentLoaded', initApp);
 async function initApp() {
     console.log("Initializing Journal App...");
 
+    // Apply User Settings (Fonts, Margins)
+    applyVisualSettings();
+
     // 1. Fetch Data
-    const chapters = await loadStoryData(CONFIG.dataSource);
+    const chapters = await loadStoryData(JOURNAL_SETTINGS.dataSource);
     if (!chapters || chapters.length === 0) return; // Exit if no data
 
     // 2. Render Content
@@ -97,13 +93,59 @@ async function initApp() {
 }
 
 /**
+ * Applies styles from settings.js to the document
+ */
+function applyVisualSettings() {
+    const r = document.querySelector(':root');
+    if (!r || !window.JOURNAL_SETTINGS) return;
+
+    const s = JOURNAL_SETTINGS;
+
+    // We can directly modify CSS variables or specific elements
+    // For simplicity, we'll maintain the CSS class structure but inject a standard style block 
+    // or modify variables if we had set them up. 
+    // Since we didn't use vars in CSS initially, let's set them on specific elements or 
+    // inject a dynamic stylesheet.
+
+    // Let's use CSS Variables which is cleaner
+    r.style.setProperty('--font-body', s.fonts.body);
+    r.style.setProperty('--font-headers', s.fonts.headers);
+    r.style.setProperty('--page-margin', s.pageMargins);
+    r.style.setProperty('--font-size', s.fontSize);
+}
+
+/**
  * Fetches story data from the JSON file.
  */
 async function loadStoryData(url) {
     try {
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        return await response.json();
+        const manifest = await response.json();
+
+        // Fetch content for each chapter
+        const chapters = await Promise.all(manifest.map(async (chapter) => {
+            // Default content to empty string to prevent crashes
+            chapter.content = "";
+
+            if (chapter.filename) {
+                try {
+                    const res = await fetch(chapter.filename);
+                    if (res.ok) {
+                        chapter.content = await res.text();
+                    } else {
+                        chapter.content = `[Error loading content: ${res.status}]`;
+                        console.warn(`Failed to fetch ${chapter.filename}: ${res.status}`);
+                    }
+                } catch (err) {
+                    console.error(`Failed to load ${chapter.filename}:`, err);
+                    chapter.content = "[Error loading content]";
+                }
+            }
+            return chapter;
+        }));
+
+        return chapters;
     } catch (e) {
         console.error("Failed to load story data:", e);
         // Fallback for local testing without server
@@ -111,7 +153,7 @@ async function loadStoryData(url) {
             {
                 title: "Welcome",
                 date: new Date().toDateString(),
-                content: "If you see this, the 'chapters.json' file could not be loaded. Please ensure you are running a local server."
+                content: "Could not load chapters.json."
             }
         ];
     }
@@ -121,31 +163,38 @@ async function loadStoryData(url) {
  * Generates HTML for the TOC and Story Pages.
  */
 function renderBookContent(chapters) {
-    const bookElement = document.getElementById(CONFIG.bookId);
-    const tocList = document.getElementById(CONFIG.tocId);
+    const bookElement = document.getElementById(JOURNAL_SETTINGS.bookId);
+    const tocList = document.getElementById(JOURNAL_SETTINGS.tocId);
 
-    // Clear existing dynamic content if any (useful for re-rendering)
+    // Clear existing dynamic content
     tocList.innerHTML = '';
 
-    // We already have static pages in HTML (Cover, TOC), so we append dynamic pages after them.
-    // Static pages count: Cover(0), TOC(1). Dynamic starts at index 2.
-    // NOTE: If you add more static pages in HTML, update this offset.
-    const startPageOffset = 2;
+    // Static pages count offset.
+    // Dynamically count existing static pages in the DOM to determine start index.
+    let globalPageIndex = document.querySelectorAll(`#${JOURNAL_SETTINGS.bookId} .page`).length;
 
-    chapters.forEach((chapter, index) => {
-        const globalPageIndex = startPageOffset + index;
-
-        // 1. Create TOC Entry
+    chapters.forEach((chapter) => {
+        // 1. Create TOC Entry (Links to the *start* of the chapter)
         const li = document.createElement('li');
         li.textContent = chapter.title;
+
+        // Capture the current starting page index for this chapter
+        const chapterStartPage = globalPageIndex;
         li.onclick = () => {
-            if (pageFlipInstance) pageFlipInstance.flip(globalPageIndex);
+            if (pageFlipInstance) pageFlipInstance.flip(chapterStartPage);
         };
         tocList.appendChild(li);
 
-        // 2. Create Page DOM
-        const pageDiv = createPageElement(chapter);
-        bookElement.appendChild(pageDiv);
+        // 2. Split Content into Pages
+        const safeContent = chapter.content || "";
+        const contentPages = splitTextIntoChunks(safeContent, JOURNAL_SETTINGS.charsPerPage || 800);
+
+        contentPages.forEach((chunk, chunkIndex) => {
+            const isFirstPage = chunkIndex === 0;
+            const pageDiv = createPageElement(chapter, chunk, isFirstPage, chunkIndex + 1, contentPages.length);
+            bookElement.appendChild(pageDiv);
+            globalPageIndex++; // Increment for next page
+        });
     });
 
     // Append Back Cover
@@ -157,21 +206,58 @@ function renderBookContent(chapters) {
 }
 
 /**
+ * Splits text into chunks based on char limit, preserving paragraphs.
+ */
+function splitTextIntoChunks(text, maxChars) {
+    if (!text) return [];
+
+    const paragraphs = text.split('\n');
+    let pages = [];
+    let currentLimit = maxChars;
+    let currentChunk = "";
+
+    paragraphs.forEach(para => {
+        // If single paragraph is huge, might still overflow, but this is a simple heuristic.
+        if ((currentChunk.length + para.length) > currentLimit && currentChunk.length > 0) {
+            pages.push(currentChunk);
+            currentChunk = para + "\n";
+        } else {
+            currentChunk += para + "\n";
+        }
+    });
+    if (currentChunk.trim().length > 0) {
+        pages.push(currentChunk);
+    }
+    return pages;
+}
+
+/**
  * Helpers to create a single page DOM element
  */
-function createPageElement(chapter) {
+function createPageElement(chapter, textContent, isFirstPage, partNum, totalParts) {
     const pageDiv = document.createElement('div');
     pageDiv.classList.add('page');
 
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('page-content');
 
-    // Optional: Parse markdown here if desired in future
+    let headerHTML = '';
+    if (isFirstPage) {
+        headerHTML = `
+            <h2>${chapter.title}</h2>
+            <span class="date">${chapter.date}</span>
+        `;
+    } else {
+        headerHTML = `<span class="date" style="font-size: 0.8em; opacity: 0.5;">${chapter.title} (Cont.)</span>`;
+    }
+
     contentDiv.innerHTML = `
-        <h2>${chapter.title}</h2>
-        <span class="date">${chapter.date}</span>
+        ${headerHTML}
         <div class="story-text">
-            <p>${chapter.content}</p>
+            <p>${textContent.replace(/\n/g, '<br>')}</p>
+        </div>
+        <div class="page-footer" style="margin-top: auto; text-align: center; font-size: 0.7em; opacity: 0.4;">
+            ${partNum} / ${totalParts}
         </div>
     `;
 
@@ -188,11 +274,11 @@ function initPageFlip() {
         return;
     }
 
-    const bookEl = document.getElementById(CONFIG.bookId);
+    const bookEl = document.getElementById(JOURNAL_SETTINGS.bookId);
 
     pageFlipInstance = new St.PageFlip(bookEl, {
-        width: CONFIG.bookDims.width,
-        height: CONFIG.bookDims.height,
+        width: JOURNAL_SETTINGS.width,
+        height: JOURNAL_SETTINGS.height,
         size: 'stretch',
         minWidth: 315,
         maxWidth: 1000,
@@ -200,12 +286,23 @@ function initPageFlip() {
         maxHeight: 1350,
         maxShadowOpacity: 0.5,
         showCover: true,
-        usePortrait: true, // Auto switch to portrait on resize
+        usePortrait: JOURNAL_SETTINGS.usePortrait ?? false, // Default to false (two-page) if undefined
         mobileScrollSupport: true // Allow touch scroll inside pages
     });
 
     // Load all pages found in the DOM (static + dynamic)
     pageFlipInstance.loadFromHTML(document.querySelectorAll('.page'));
 
-    console.log(`Book Engine Started. Total Pages: ${pageFlipInstance.getPageCount()}`);
+    console.log(`Book Engine Started.`);
+
+    // UI Controls
+    const btnToc = document.getElementById('btn-toc');
+    if (btnToc) {
+        btnToc.onclick = () => {
+            // TOC is page 1 (cover is 0)
+            // But StPageFlip uses 0-based index.
+            // If we have Cover(0), TOC(1).
+            pageFlipInstance.flip(1);
+        };
+    }
 }

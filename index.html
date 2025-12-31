@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Interactive Journal</title>
     <link rel="stylesheet" href="style.css">
-    
+
     <!-- Libraries -->
     <!-- p5.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
     <!-- StPageFlip -->
     <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
+
+    <!-- User Settings -->
+    <script src="settings.js"></script>
 </head>
+
 <body>
 
     <!-- p5.js container (background) -->
@@ -21,7 +26,7 @@
     <div class="book-wrapper">
         <div id="book">
             <!-- Pages will be injected here by script.js -->
-            
+
             <!-- Hardcoded Cover for initial structure -->
             <div class="page cover" data-density="hard">
                 <div class="page-content">
@@ -29,6 +34,11 @@
                     <p class="author">by A. Traveler</p>
                     <p class="instruction">(Click corner or drag to open)</p>
                 </div>
+            </div>
+
+            <!-- Blank Page (Inside Cover) -->
+            <div class="page">
+                <div class="page-content"></div>
             </div>
 
             <!-- Hardcoded Table of Contents Page -->
@@ -41,9 +51,23 @@
                 </div>
             </div>
 
+            <!-- Blank Page for spacing (TOC on left, Blank on right) -->
+            <div class="page">
+                <div class="page-content"></div>
+            </div>
+
         </div>
+    </div>
+    </div>
+
+    <!-- UI Controls -->
+    <div id="ui-controls">
+        <button id="btn-toc" title="Go to Table of Contents">
+            Table of Contents
+        </button>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
