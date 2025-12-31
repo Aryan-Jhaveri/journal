@@ -1,4 +1,5 @@
 
+
 // Global Configuration for the Interactive Journal
 const JOURNAL_SETTINGS = {
     // --- Book Dimensions & Setup ---
@@ -18,6 +19,22 @@ const JOURNAL_SETTINGS = {
     // Set to false to disable the p5.js particle background
     enableBackgroundAnimation: false,
 
+    // --- Shader Background Settings ---
+    shaderBackgrounds: {
+        enabled: true,  // Master toggle for shader backgrounds
+        fallbackToParticles: true,  // Use particle system if shaders fail
+        performanceMode: 'auto'  // 'auto', 'high', 'low'
+    },
+
+    // Scene mapping: chapter filename -> sketch scene name
+    sceneMapping: {
+        'prologue': 'PrologueScene',
+        'chapter_01': 'Chapter01Scene',
+        'chapter_02': 'Chapter02Scene',
+        'chapter_03': 'Chapter03Scene',
+        'default': 'DefaultScene'
+    },
+
     // --- Styling (Applied at runtime) ---
     // CSS font strings. Make sure these fonts are imported in css or available.
     fonts: {
@@ -36,3 +53,4 @@ const JOURNAL_SETTINGS = {
     // Approximate characters per page before splitting to a new page.
     charsPerPage: 500  // Low default to demonstrate splitting easily
 };
+
