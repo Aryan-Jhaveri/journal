@@ -65,10 +65,10 @@ const JOURNAL_SETTINGS = {
     // Sized to fit within mobile viewport with room for controls
     // =========================================================================
     mobile: {
-        pageWidthPercent: 0.85,   // Page width as % of viewport width
-        pageHeightPercent: 0.70,  // Page height as % of viewport height
-        maxPageWidth: 380,        // Max width in pixels (better for modern phones)
-        maxPageHeight: 535        // Max height (380 / 0.709 ≈ 535)
+        pageWidthPercent: 0.75,   // Page width as % of viewport width
+        pageHeightPercent: 0.60,  // Page height as % of viewport height
+        maxPageWidth: 260,        // Max width in pixels
+        maxPageHeight: 367        // Max height (260 / 0.709 ≈ 367)
     },
 
     // =========================================================================
@@ -139,12 +139,27 @@ const JOURNAL_SETTINGS = {
     },
 
     // =========================================================================
+    // AUDIO & HAPTICS
+    // =========================================================================
+    audio: {
+        enabled: true,         // Master audio toggle
+        volume: 0.4,           // Effect volume (0.0 - 1.0)
+        pitchVariation: 0.1    // Random pitch variance for realism
+    },
+
+    haptics: {
+        enabled: true,         // Master haptic toggle
+        duration: 20           // Vibration duration in ms
+    },
+
+    // =========================================================================
     // DEBUG & LOGGING
     // =========================================================================
     debug: {
         logPageChanges: false,
         logSceneSwitches: true,
-        logResponsiveChanges: true
+        logResponsiveChanges: true,
+        logAudio: false
     }
 };
 

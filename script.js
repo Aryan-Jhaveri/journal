@@ -16,6 +16,11 @@ async function initApp() {
         BackgroundSceneManager.init();
     }
 
+    // 2a. Initialize Audio Manager
+    if (typeof AudioManager !== 'undefined') {
+        AudioManager.init();
+    }
+
     // 3. Load Chapter Data
     const chapters = await DataLoader.loadChapters(JOURNAL_SETTINGS.dataSource);
     if (!chapters || chapters.length === 0) {
