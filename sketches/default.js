@@ -10,6 +10,7 @@ class DefaultScene {
     }
 
     setup() {
+        if (!this.p) return;
         this.p.background(44, 41, 37);
 
         // Initialize particles
