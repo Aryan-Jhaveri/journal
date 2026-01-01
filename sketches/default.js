@@ -19,7 +19,9 @@ class DefaultScene {
     }
 
     draw() {
+        if (!this.p) return;
         this.p.background(44, 41, 37, 10);
+
 
         for (let particle of this.particles) {
             particle.update();

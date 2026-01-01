@@ -65,10 +65,10 @@ const JOURNAL_SETTINGS = {
     // Sized to fit within mobile viewport with room for controls
     // =========================================================================
     mobile: {
-        pageWidthPercent: 0.75,   // Page width as % of viewport width
-        pageHeightPercent: 0.60,  // Page height as % of viewport height
-        maxPageWidth: 260,        // Max width in pixels
-        maxPageHeight: 367        // Max height (260 / 0.709 ≈ 367)
+        pageWidthPercent: 0.85,   // Page width as % of viewport width
+        pageHeightPercent: 0.70,  // Page height as % of viewport height
+        maxPageWidth: 380,        // Max width in pixels (better for modern phones)
+        maxPageHeight: 535        // Max height (380 / 0.709 ≈ 535)
     },
 
     // =========================================================================
@@ -81,7 +81,7 @@ const JOURNAL_SETTINGS = {
         maxHeight: 500,
         maxShadowOpacity: 0.5,
         showCover: true,
-        mobileScrollSupport: true,
+        mobileScrollSupport: false,
         autoSize: true
     },
 
