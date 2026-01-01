@@ -147,15 +147,14 @@ p {
 }
 
 /* --- PDF Page Styling --- */
-/* A6 Document Margins: 2.54cm (~1 inch) all sides */
+/* PDF fills entire page - no padding */
 .pdf-page {
-    padding: 24px !important;
-    /* ~2.54cm at screen resolution */
+    padding: 0 !important;
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fdfbf7;
+    background: transparent;
     overflow: hidden;
     box-sizing: border-box;
 }
@@ -163,9 +162,9 @@ p {
 .pdf-page-image {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    /* Maintain aspect ratio, fit within padded area */
-    background: #fdfbf7;
+    object-fit: fill;
+    /* Fill entire page - PDF already has margins */
+    display: block;
 }
 
 /* Error page styling */
