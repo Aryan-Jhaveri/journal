@@ -50,35 +50,35 @@ const JOURNAL_SETTINGS = {
     // BOOK SIZING - Desktop (Two-page spread)
     // A6 Paper: 105mm x 148mm (Portrait: width < height)
     // Aspect ratio: 0.709 (width/height)
-    // Using 96 DPI reference: 397 x 559 pixels
+    // Sized to fit comfortably in viewport with margins
     // =========================================================================
     desktop: {
-        pageWidthPercent: 0.18,   // Each page as % of viewport width
-        pageHeightPercent: 0.70,  // Page height as % of viewport height
-        maxPageWidth: 397,        // A6 width at 96 DPI
-        maxPageHeight: 559        // A6 height at 96 DPI
+        pageWidthPercent: 0.22,   // Each page as % of viewport width (~44% total for spread)
+        pageHeightPercent: 0.75,  // Page height as % of viewport height
+        maxPageWidth: 280,        // Max width per page in pixels
+        maxPageHeight: 395        // Max height (280 / 0.709 ≈ 395)
     },
 
     // =========================================================================
     // BOOK SIZING - Mobile (Single page view)
     // A6 Paper proportions maintained (Portrait)
-    // Scaled down from 96 DPI for mobile screens
+    // Sized to fit within mobile viewport with room for controls
     // =========================================================================
     mobile: {
-        pageWidthPercent: 0.85,   // Page width as % of viewport width
-        pageHeightPercent: 0.65,  // Page height as % of viewport height
-        maxPageWidth: 298,        // A6 width at 72 DPI
-        maxPageHeight: 420        // A6 height at 72 DPI
+        pageWidthPercent: 0.75,   // Page width as % of viewport width
+        pageHeightPercent: 0.60,  // Page height as % of viewport height
+        maxPageWidth: 260,        // Max width in pixels
+        maxPageHeight: 367        // Max height (260 / 0.709 ≈ 367)
     },
 
     // =========================================================================
     // STPAGEFLIP LIBRARY SETTINGS
     // =========================================================================
     pageFlip: {
-        minWidth: 150,
-        maxWidth: 500,
-        minHeight: 200,
-        maxHeight: 700,
+        minWidth: 120,
+        maxWidth: 350,
+        minHeight: 170,
+        maxHeight: 500,
         maxShadowOpacity: 0.5,
         showCover: true,
         mobileScrollSupport: true,
