@@ -53,8 +53,8 @@ const JOURNAL_SETTINGS = {
     desktop: {
         pageWidthPercent: 0.20,   // Each page as % of viewport width
         pageHeightPercent: 0.35,  // Page height as % of viewport height (15% top, 20% bottom margin)
-        maxPageWidth: 290,        // ~A6 width in pixels (maintains aspect ratio)
-        maxPageHeight: 410        // ~A6 height in pixels (290 / 0.707 ≈ 410)
+        maxPageWidth: 1748,        // ~A6 width in pixels (maintains aspect ratio)
+        maxPageHeight: 1240        // ~A6 height in pixels (290 / 0.707 ≈ 410)
     },
 
     // =========================================================================
@@ -97,13 +97,10 @@ const JOURNAL_SETTINGS = {
     // CONTENT SETTINGS
     // =========================================================================
     content: {
-        charsPerPage: 500,           // Approximate characters per page
-        estimatedImageSize: 300,     // Estimated "size" of image in character units
-
         // Fallback content when chapters.json fails to load
         fallback: {
             title: 'Welcome',
-            content: 'Could not load chapters.json. Please check your connection.'
+            message: 'Could not load chapters.json. Please check your connection.'
         }
     },
 
@@ -151,5 +148,3 @@ const JOURNAL_SETTINGS = {
 // Legacy accessors for backwards compatibility
 JOURNAL_SETTINGS.bookId = JOURNAL_SETTINGS.elements.bookId;
 JOURNAL_SETTINGS.tocId = JOURNAL_SETTINGS.elements.tocListId;
-JOURNAL_SETTINGS.charsPerPage = JOURNAL_SETTINGS.content.charsPerPage;
-

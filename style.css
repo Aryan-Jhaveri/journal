@@ -146,27 +146,6 @@ p {
     font-weight: bold;
 }
 
-/* --- Images --- */
-.story-image-container {
-    text-align: center;
-    margin: 15px 0;
-}
-
-.story-image {
-    max-width: 100%;
-    max-height: 300px;
-    /* Limit height to prevent overflow */
-    border: 3px solid #fff;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    transform: rotate(-1deg);
-    /* Slight aesthetic tilt */
-    transition: transform 0.3s ease;
-}
-
-.story-image:hover {
-    transform: rotate(0deg) scale(1.02);
-}
-
 /* --- PDF Page Styling --- */
 .pdf-page {
     padding: 0 !important;
