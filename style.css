@@ -356,7 +356,7 @@ p {
 
     /* Ensure cover text is visible and centered on mobile */
     .cover {
-        display: flex !important;
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;

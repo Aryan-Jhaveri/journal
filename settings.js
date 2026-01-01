@@ -76,9 +76,9 @@ const JOURNAL_SETTINGS = {
     // =========================================================================
     pageFlip: {
         minWidth: 120,
-        maxWidth: 350,
+        maxWidth: 600, // Increased to allow mobile's 380px without conflict
         minHeight: 170,
-        maxHeight: 500,
+        maxHeight: 700,
         maxShadowOpacity: 0.5,
         showCover: true,
         mobileScrollSupport: false,
