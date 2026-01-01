@@ -48,24 +48,27 @@ const JOURNAL_SETTINGS = {
 
     // =========================================================================
     // BOOK SIZING - Desktop (Two-page spread)
-    // A6 Paper: 4.1" x 5.8" (105mm x 148mm) - Aspect ratio ~0.707 (width:height)
+    // A6 Paper: 105mm x 148mm (Portrait: width < height)
+    // Aspect ratio: 0.709 (width/height)
+    // Using 96 DPI reference: 397 x 559 pixels
     // =========================================================================
     desktop: {
-        pageWidthPercent: 0.20,   // Each page as % of viewport width
-        pageHeightPercent: 0.35,  // Page height as % of viewport height (15% top, 20% bottom margin)
-        maxPageWidth: 1748,        // ~A6 width in pixels (maintains aspect ratio)
-        maxPageHeight: 1240        // ~A6 height in pixels (290 / 0.707 ≈ 410)
+        pageWidthPercent: 0.18,   // Each page as % of viewport width
+        pageHeightPercent: 0.70,  // Page height as % of viewport height
+        maxPageWidth: 397,        // A6 width at 96 DPI
+        maxPageHeight: 559        // A6 height at 96 DPI
     },
 
     // =========================================================================
     // BOOK SIZING - Mobile (Single page view)
-    // A6 Paper proportions maintained
+    // A6 Paper proportions maintained (Portrait)
+    // Scaled down from 96 DPI for mobile screens
     // =========================================================================
     mobile: {
         pageWidthPercent: 0.85,   // Page width as % of viewport width
-        pageHeightPercent: 0.70,  // Page height as % of viewport height
-        maxPageWidth: 280,        // A6 proportion width
-        maxPageHeight: 396        // A6 proportion height (280 / 0.707 ≈ 396)
+        pageHeightPercent: 0.65,  // Page height as % of viewport height
+        maxPageWidth: 298,        // A6 width at 72 DPI
+        maxPageHeight: 420        // A6 height at 72 DPI
     },
 
     // =========================================================================
