@@ -2,21 +2,21 @@
   {
     "title": "Prologue: The Old Attic",
     "date": "October 12th",
-    "filename": "chapters/prologue.txt"
+    "pdfFile": "chapters/prologue.pdf"
   },
   {
     "title": "Chapter 1: The Stranger",
     "date": "October 14th",
-    "filename": "chapters/chapter_01.txt"
+    "pdfFile": "chapters/chapter_01.pdf"
   },
   {
     "title": "Chapter 2: The Letter",
     "date": "October 20th",
-    "filename": "chapters/chapter_02.txt"
+    "pdfFile": "chapters/chapter_02.pdf"
   },
   {
     "title": "Chapter 3: The Discovery",
     "date": "October 25th",
-    "filename": "chapters/chapter_03.txt"
+    "pdfFile": "chapters/chapter_03.pdf"
   }
 ]

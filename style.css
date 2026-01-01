@@ -167,6 +167,40 @@ p {
     transform: rotate(0deg) scale(1.02);
 }
 
+/* --- PDF Page Styling --- */
+.pdf-page {
+    padding: 0 !important;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fdfbf7;
+    overflow: hidden;
+}
+
+.pdf-page-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Maintain aspect ratio, fit within page */
+    background: #fdfbf7;
+}
+
+/* Error page styling */
+.error-message {
+    color: #c0392b;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2em;
+}
+
+.error-detail {
+    color: #888;
+    font-size: 0.9em;
+    text-align: center;
+    font-style: italic;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     .book-wrapper {
