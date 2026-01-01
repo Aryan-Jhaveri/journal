@@ -48,22 +48,24 @@ const JOURNAL_SETTINGS = {
 
     // =========================================================================
     // BOOK SIZING - Desktop (Two-page spread)
+    // A6 Paper: 4.1" x 5.8" (105mm x 148mm) - Aspect ratio ~0.707 (width:height)
     // =========================================================================
     desktop: {
-        pageWidthPercent: 0.25,   // Each page as % of viewport width
-        pageHeightPercent: 0.70,  // Page height as % of viewport height
-        maxPageWidth: 450,        // Maximum page width in pixels
-        maxPageHeight: 650        // Maximum page height in pixels
+        pageWidthPercent: 0.20,   // Each page as % of viewport width
+        pageHeightPercent: 0.35,  // Page height as % of viewport height (15% top, 20% bottom margin)
+        maxPageWidth: 290,        // ~A6 width in pixels (maintains aspect ratio)
+        maxPageHeight: 410        // ~A6 height in pixels (290 / 0.707 ≈ 410)
     },
 
     // =========================================================================
     // BOOK SIZING - Mobile (Single page view)
+    // A6 Paper proportions maintained
     // =========================================================================
     mobile: {
         pageWidthPercent: 0.85,   // Page width as % of viewport width
-        pageHeightPercent: 0.65,  // Page height as % of viewport height
-        maxPageWidth: 350,        // Maximum page width in pixels
-        maxPageHeight: 500        // Maximum page height in pixels
+        pageHeightPercent: 0.70,  // Page height as % of viewport height
+        maxPageWidth: 280,        // A6 proportion width
+        maxPageHeight: 396        // A6 proportion height (280 / 0.707 ≈ 396)
     },
 
     // =========================================================================
