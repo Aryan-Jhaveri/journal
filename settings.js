@@ -82,7 +82,7 @@ const JOURNAL_SETTINGS = {
         maxShadowOpacity: 0.5,
         showCover: true,
         mobileScrollSupport: false,
-        autoSize: true
+        autoSize: false  // Must be false so page-flip leaf aligns with book dimensions
     },
 
     // =========================================================================
@@ -127,15 +127,6 @@ const JOURNAL_SETTINGS = {
         enabled: true,               // Master toggle
         fallbackToParticles: true,   // Use particles if shaders fail
         performanceMode: 'auto'      // 'auto', 'high', 'low'
-    },
-
-    // Scene mapping: chapter filename -> scene constructor name
-    sceneMapping: {
-        'prologue': 'PrologueScene',
-        'chapter_01': 'Chapter01Scene',
-        'chapter_02': 'Chapter02Scene',
-        'chapter_03': 'Chapter03Scene',
-        'default': 'DefaultScene'
     },
 
     // =========================================================================

@@ -44,6 +44,7 @@ body {
 
 /* The book styling is handled largely by the library, but we style the pages */
 .page {
+    box-sizing: border-box;
     background-color: #fdfbf7;
     /* Off-white paper */
     background-image:
