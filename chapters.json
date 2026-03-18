@@ -1,22 +1,57 @@
 [
   {
-    "title": "Prologue: The Old Attic",
-    "date": "October 12th",
-    "pdfFile": "chapters/ch0.pdf"
-  },
-  {
-    "title": "Chapter 1: The Stranger",
-    "date": "October 14th",
+    "title": "Note 1: First Entry",
+    "date": "",
     "pdfFile": "chapters/ch1.pdf"
   },
   {
-    "title": "Chapter 2: The Letter",
-    "date": "October 20th",
-    "pdfFile": "chapters/chapter_02.pdf"
+    "title": "Note 2: First Dose",
+    "date": "",
+    "pdfFile": "chapters/ch2.pdf"
   },
   {
-    "title": "Chapter 3: The Discovery",
-    "date": "October 25th",
-    "pdfFile": "chapters/chapter_03.pdf"
+    "title": "Note 3: Professors",
+    "date": "",
+    "pdfFile": "chapters/ch3.pdf"
+  },
+  {
+    "title": "Note 4: Three Animals",
+    "date": "",
+    "pdfFile": "chapters/ch4.pdf"
+  },
+  {
+    "title": "Note 5: Helping Hand",
+    "date": "",
+    "pdfFile": "chapters/ch5.pdf"
+  },
+  {
+    "title": "Note 6: Twin Beads",
+    "date": "",
+    "pdfFile": "chapters/ch6.pdf"
+  },
+  {
+    "title": "Note 7: Neighbours View",
+    "date": "",
+    "pdfFile": "chapters/ch7.pdf"
+  },
+  {
+    "title": "Note 8: Water",
+    "date": "",
+    "pdfFile": "chapters/ch8.pdf"
+  },
+  {
+    "title": "Note 9: Store Mom",
+    "date": "",
+    "pdfFile": "chapters/ch9.pdf"
+  },
+  {
+    "title": "Note 10: Last Dose",
+    "date": "",
+    "pdfFile": "chapters/ch10.pdf"
+  },
+  {
+    "title": "Note 11: Moving On",
+    "date": "",
+    "pdfFile": "chapters/ch11.pdf"
   }
 ]
