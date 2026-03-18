@@ -34,16 +34,26 @@ async function initApp() {
     // 5. Initialize Page Flip
     BookEngine.initPageFlip();
 
+    // 5b. Initialize Zoom Manager
+    if (typeof ZoomManager !== 'undefined' && JOURNAL_SETTINGS.zoom?.enabled) {
+        ZoomManager.init();
+    }
+
     // 6. Initialize Responsive Manager (mobile/desktop detection)
     if (typeof ResponsiveManager !== 'undefined') {
         ResponsiveManager.init();
     }
 
-    // 7. Connect Page Change Events to Scene Switching
+    // 7. Connect Page Change Events to Scene Switching + Zoom Reset
     BookEngine.onPageChange((pageData) => {
         const chapterInfo = BookEngine.getChapterForPage(pageData);
         if (chapterInfo && JOURNAL_SETTINGS.shaderBackgrounds.enabled) {
             BackgroundSceneManager.switchScene(chapterInfo);
+        }
+
+        // Reset zoom on page flip
+        if (typeof ZoomManager !== 'undefined' && JOURNAL_SETTINGS.zoom?.resetOnPageFlip) {
+            ZoomManager.resetZoom();
         }
     });
 

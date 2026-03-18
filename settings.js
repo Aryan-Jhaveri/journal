@@ -53,10 +53,10 @@ const JOURNAL_SETTINGS = {
     // Sized to fit comfortably in viewport with margins
     // =========================================================================
     desktop: {
-        pageWidthPercent: 0.22,   // Each page as % of viewport width (~44% total for spread)
-        pageHeightPercent: 0.75,  // Page height as % of viewport height
-        maxPageWidth: 280,        // Max width per page in pixels
-        maxPageHeight: 395        // Max height (280 / 0.709 ≈ 395)
+        pageWidthPercent: 0.28,   // Each page as % of viewport width (~56% total for spread)
+        pageHeightPercent: 0.80,  // Page height as % of viewport height
+        maxPageWidth: 380,        // Max width per page in pixels
+        maxPageHeight: 536        // Max height (380 / 0.709 ≈ 536)
     },
 
     // =========================================================================
@@ -65,10 +65,10 @@ const JOURNAL_SETTINGS = {
     // Sized to fit within mobile viewport with room for controls
     // =========================================================================
     mobile: {
-        pageWidthPercent: 0.75,   // Page width as % of viewport width
-        pageHeightPercent: 0.60,  // Page height as % of viewport height
-        maxPageWidth: 260,        // Max width in pixels
-        maxPageHeight: 367        // Max height (260 / 0.709 ≈ 367)
+        pageWidthPercent: 0.80,   // Page width as % of viewport width
+        pageHeightPercent: 0.65,  // Page height as % of viewport height
+        maxPageWidth: 320,        // Max width in pixels
+        maxPageHeight: 451        // Max height (320 / 0.709 ≈ 451)
     },
 
     // =========================================================================
@@ -76,9 +76,9 @@ const JOURNAL_SETTINGS = {
     // =========================================================================
     pageFlip: {
         minWidth: 120,
-        maxWidth: 600, // Increased to allow mobile's 380px without conflict
+        maxWidth: 500,
         minHeight: 170,
-        maxHeight: 700,
+        maxHeight: 600,
         maxShadowOpacity: 0.5,
         showCover: true,
         mobileScrollSupport: false,
@@ -151,6 +151,19 @@ const JOURNAL_SETTINGS = {
         logSceneSwitches: true,
         logResponsiveChanges: true,
         logAudio: false
+    },
+
+    // =========================================================================
+    // ZOOM & PAN
+    // =========================================================================
+    zoom: {
+        enabled: true,
+        minScale: 1,
+        maxScale: 3,
+        step: 0.25,              // Zoom increment per click/scroll
+        panSpeed: 1,             // Multiplier for drag panning
+        scrollZoom: true,        // Zoom with Ctrl+scroll / trackpad pinch
+        resetOnPageFlip: true    // Reset zoom when a page is turned
     }
 };
 

@@ -1,5 +1,8 @@
 # Implementation notes (private)
 implementation.md
+claude.md
+.gitignore
+
 
 # Dependencies
 node_modules/
