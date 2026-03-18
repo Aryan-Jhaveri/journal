@@ -3,6 +3,9 @@ implementation.md
 claude.md
 .gitignore
 
+# Source PDFs (split into ch*.pdf for deployment)
+chapters/Draft*.pdf
+
 
 # Dependencies
 node_modules/
