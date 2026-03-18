@@ -53,10 +53,10 @@ const JOURNAL_SETTINGS = {
     // Sized to fit comfortably in viewport with margins
     // =========================================================================
     desktop: {
-        pageWidthPercent: 0.28,   // Each page as % of viewport width (~56% total for spread)
-        pageHeightPercent: 0.80,  // Page height as % of viewport height
-        maxPageWidth: 380,        // Max width per page in pixels
-        maxPageHeight: 536        // Max height (380 / 0.709 ≈ 536)
+        pageWidthPercent: 0.30,   // Each page as % of viewport width (~60% total for spread)
+        pageHeightPercent: 0.88,  // Page height as % of viewport height
+        maxPageWidth: 520,        // Max width per page in pixels
+        maxPageHeight: 800        // Max height
     },
 
     // =========================================================================
@@ -76,9 +76,9 @@ const JOURNAL_SETTINGS = {
     // =========================================================================
     pageFlip: {
         minWidth: 120,
-        maxWidth: 500,
+        maxWidth: 600,
         minHeight: 170,
-        maxHeight: 600,
+        maxHeight: 850,
         maxShadowOpacity: 0.5,
         showCover: true,
         mobileScrollSupport: false,
