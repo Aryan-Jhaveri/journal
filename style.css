@@ -167,7 +167,14 @@ p {
 }
 
 /* --- PDF Page Styling --- */
-/* PDF fills entire page - no padding */
+/* Remove all padding/border from PDF pages — PDF has its own margins */
+.page.pdf-book-page {
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+
 .pdf-page {
     padding: 0 !important;
     margin: 0;
@@ -182,8 +189,7 @@ p {
 .pdf-page-image {
     width: 100%;
     height: 100%;
-    object-fit: fill;
-    /* Fill entire page - PDF already has margins */
+    object-fit: contain;
     display: block;
 }
 

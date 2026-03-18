@@ -37,6 +37,10 @@ const JOURNAL_SETTINGS = {
     // Set to false to allow two-page spread when screen is wide enough
     usePortrait: false,
 
+    // PDF page aspect ratio (height / width) — used to size book pages without stretching
+    // US Letter: 792/612 = 1.294  |  A4: 842/595 = 1.415  |  A6: 420/298 = 1.409
+    pdfAspectRatio: 792 / 612,
+
     // Number of static pages before dynamic content (Cover, Blank, TOC, Blank)
     staticPageCount: 4,
 
@@ -56,7 +60,7 @@ const JOURNAL_SETTINGS = {
         pageWidthPercent: 0.30,   // Each page as % of viewport width (~60% total for spread)
         pageHeightPercent: 0.88,  // Page height as % of viewport height
         maxPageWidth: 520,        // Max width per page in pixels
-        maxPageHeight: 800        // Max height
+        maxPageHeight: 673        // Max height (520 * 1.294 letter ratio)
     },
 
     // =========================================================================
@@ -68,7 +72,7 @@ const JOURNAL_SETTINGS = {
         pageWidthPercent: 0.88,   // Page width as % of viewport width
         pageHeightPercent: 0.73,  // Page height as % of viewport height
         maxPageWidth: 390,        // Max width in pixels
-        maxPageHeight: 550        // Max height (390 / 0.709 ≈ 550, maintains A6 ratio)
+        maxPageHeight: 505        // Max height (390 * 1.294 letter ratio)
     },
 
     // =========================================================================
@@ -78,7 +82,7 @@ const JOURNAL_SETTINGS = {
         minWidth: 120,
         maxWidth: 600,
         minHeight: 170,
-        maxHeight: 850,
+        maxHeight: 700,
         maxShadowOpacity: 0.5,
         showCover: true,
         mobileScrollSupport: false,
