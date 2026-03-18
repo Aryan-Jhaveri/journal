@@ -65,10 +65,10 @@ const JOURNAL_SETTINGS = {
     // Sized to fit within mobile viewport with room for controls
     // =========================================================================
     mobile: {
-        pageWidthPercent: 0.80,   // Page width as % of viewport width
-        pageHeightPercent: 0.65,  // Page height as % of viewport height
-        maxPageWidth: 320,        // Max width in pixels
-        maxPageHeight: 451        // Max height (320 / 0.709 ≈ 451)
+        pageWidthPercent: 0.88,   // Page width as % of viewport width
+        pageHeightPercent: 0.73,  // Page height as % of viewport height
+        maxPageWidth: 390,        // Max width in pixels
+        maxPageHeight: 550        // Max height (390 / 0.709 ≈ 550, maintains A6 ratio)
     },
 
     // =========================================================================
